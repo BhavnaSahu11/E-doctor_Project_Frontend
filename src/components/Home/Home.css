@@ -1,0 +1,65 @@
+.unique-home {
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.e-doctor-nav {
+  position: absolute; /* Positions it relative to the page */
+  top: 10px; /* Adds a small gap from the top */
+  left: 20px; /* Aligns it to the left */
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.e-doctor-nav ul {
+  list-style-type: none; /* Removes bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+.e-doctor-nav a {
+  text-decoration: none;
+  color: white; /* White color for text */
+  font-size: 30px; /* Large font for title */
+}
+
+/* Main Nav - Top Right */
+.main-nav {
+  position: absolute; /* Fixes the nav to the top of the page */
+  top: 10px; /* Adds a gap from the top */
+  right: 20px; /* Aligns it to the right */
+  display: flex;
+  gap: 20px; /* Space between items */
+}
+
+.main-nav ul {
+  list-style-type: none; /* Removes bullet points */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px; /* Space between each item */
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: white; /* Color of the links */
+  font-size: 18px; /* Slightly smaller font for links */
+  font-weight: bold;
+  padding: 8px 16px; /* Add padding for better clickable area */
+  transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Hover effect for nav items */
+.main-nav a:hover {
+  color: #C6E7FF; /* Change color on hover */
+  background-color: rgba(26, 150, 208, 0.2); /* Light blue background on hover */
+  transform: scale(1.1); /* Slightly enlarge the item */
+}
