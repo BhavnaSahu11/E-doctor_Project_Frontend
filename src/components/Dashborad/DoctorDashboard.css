@@ -31,8 +31,8 @@
   }
   
   .profile-picture {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     border: 3px solid #1abc9c;
     margin-bottom: 10px;
@@ -119,7 +119,7 @@
   
   /* Cards */
   .cards-container {
-    display: grid;
+    display: grid ;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
   }

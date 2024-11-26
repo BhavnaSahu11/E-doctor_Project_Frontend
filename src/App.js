@@ -7,6 +7,8 @@ import UserLogin from './components/Login/UserLogin';  // Import UserLogin compo
 import DoctorLogin from './components/Login/DoctorLogin';
 import AdminLogin from './components/Login/AdminLogin';
 import ForgotPassword from './components/Login/ForgotPassword';
+import DoctorDashboard from './components/Dashborad/DoctorDashboard';
+import EditProfile from './components/Dashborad/EditProfile';
 
 
 function App() {
@@ -28,6 +30,16 @@ function App() {
         <Route path="/registration" element={<Registration />} />  {/* Registration route */}
 
         <Route path="/forgot-password" element={<ForgotPassword />}/>
+
+        <Route path="/doctor-dashboard" element={<DoctorDashboard />}/>
+
+        <Route path="/edit-profile" element={<EditProfile />} />
+
+
+
+
+
+
       </Routes>
     </BrowserRouter>
   );

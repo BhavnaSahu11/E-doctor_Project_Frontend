@@ -1,8 +1,44 @@
-import React, { useState } from "react";
-import './DoctorDashboard.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./DoctorDashboard.css";
+import EditProfile from "./EditProfile";
 
 const DoctorDashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
+  const [doctorEmail, setDoctorEmail] = useState("");
+  const [doctorProfile, setDoctorProfile] = useState({
+    doctorName: "",
+    speciality: "",
+    location: "",
+    mobileNo: "",
+    hospitalName: "",
+    chargedPerVisit: "",
+  });
+
+  // Fetch doctor's email
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/doctor/get-welcome-email")
+      .then((response) => {
+        setDoctorEmail(response.data.email || "Unknown Email");
+      })
+      .catch((error) => {
+        console.error("Error fetching email:", error);
+        setDoctorEmail("Error fetching email");
+      });
+  }, []);
+
+  // Fetch doctor's profile
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/doctor/profile")
+      .then((response) => {
+        setDoctorProfile(response.data); // Populate doctorProfile with backend data
+      })
+      .catch((error) => {
+        console.error("Error fetching profile:", error);
+      });
+  }, []);
 
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
@@ -14,14 +50,26 @@ const DoctorDashboard = () => {
       <div className="sidebar">
         <div className="profile-section">
           <img
-            src="https://via.placeholder.com/100"
+            src="assets/img/maledoctor.png"
             alt="Doctor"
             className="profile-picture"
           />
-          <p className="doctor-name">Dr. John Doe</p>
+          {/* Dynamically display the fetched doctor's name */}
+          <p className="doctor-name">
+            {doctorProfile.doctorName || "Loading Name..."}
+          </p>
         </div>
         <ul className="menu-list">
-          {["Dashboard", "Edit Profile", "Approval Status", "Your Schedule", "Doctor List", "Patients", "Appointments", "Add Prescriptions"].map((menu) => (
+          {[
+            "Dashboard",
+            "Edit Profile",
+            "Approval Status",
+            "Your Schedule",
+            "Doctor List",
+            "Patients",
+            "Appointments",
+            "Add Prescriptions",
+          ].map((menu) => (
             <li
               key={menu}
               className={selectedMenu === menu ? "menu-item active" : "menu-item"}
@@ -39,13 +87,13 @@ const DoctorDashboard = () => {
         <div className="Doctor-navbar">
           <ul>
             <li>
-              <a href="/">Home</a>
+              <a href="/doctor-dashboard">Home</a>
             </li>
             <li>
-              <span>Welcome doctor2@gmail.com</span>
+              <span>Welcome {doctorEmail || "Loading..."}</span>
             </li>
             <li>
-              <a href="/profile">Profile</a>
+              <a href="/WelcomePage">Logout</a>
             </li>
           </ul>
         </div>
@@ -60,12 +108,8 @@ const DoctorDashboard = () => {
           {selectedMenu === "Dashboard" && (
             <>
               <div className="card">
-                <h2>Prescriptions</h2>
-                <p>2 medications</p>
-              </div>
-              <div className="card">
-                <h2>Total Doctors</h2>
-                <p>3 doctors</p>
+                <h2>Appointments</h2>
+                <p>2 </p>
               </div>
               <div className="card">
                 <h2>Total Patients</h2>
@@ -75,12 +119,24 @@ const DoctorDashboard = () => {
                 <h2>Total Slots</h2>
                 <p>3 slots</p>
               </div>
+
+              <div className="card">
+                <h2>Total Slots</h2>
+                <p>3 slots</p>
+              </div>
+              
             </>
           )}
-          {selectedMenu !== "Dashboard" && (
+
+          {selectedMenu === "Edit Profile" && (
+            <EditProfile doctorProfile={doctorProfile} setDoctorProfile={setDoctorProfile} />
+          )}
+
+          {selectedMenu !== "Dashboard" && selectedMenu !== "Edit Profile" && (
             <div className="dynamic-content">
-              <p>Showing details for: <strong>{selectedMenu}</strong></p>
-              {/* You can add dynamic rendering of content here based on selectedMenu */}
+              <p>
+                Showing details for: <strong>{selectedMenu}</strong>
+              </p>
             </div>
           )}
         </div>
