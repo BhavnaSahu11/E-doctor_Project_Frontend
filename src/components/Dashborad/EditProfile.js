@@ -70,8 +70,7 @@ const EditProfile = () => {
                 navigate('/doctor-dashboard');
 
             } else {
-                const errorText = await response.text();
-                setError(`Failed to update profile: ${errorText}`);
+                setError("Failed to update profile");
             }
         } catch (err) {
             setError("An error occurred while updating the profile.");
@@ -91,7 +90,7 @@ const EditProfile = () => {
 
     return (
         <div className="edit-profile-container">
-            <h2>Edit Doctor Profile</h2>
+            <h2>Update Your Profile</h2>
             {successMessage && <div className="success">{successMessage}</div>}
             <form onSubmit={handleSubmit} className="edit-profile-form">
                 <div className="form-group">

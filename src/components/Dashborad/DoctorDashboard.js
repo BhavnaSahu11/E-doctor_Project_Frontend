@@ -1,7 +1,10 @@
+// src/components/DoctorDashboard.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./DoctorDashboard.css";
 import EditProfile from "./EditProfile";
+import YourSchedule from "./YourSchedule"; 
+import DoctorList from "./DoctorList"; // Import the YourSchedule component
 
 const DoctorDashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
@@ -54,7 +57,6 @@ const DoctorDashboard = () => {
             alt="Doctor"
             className="profile-picture"
           />
-          {/* Dynamically display the fetched doctor's name */}
           <p className="doctor-name">
             {doctorProfile.doctorName || "Loading Name..."}
           </p>
@@ -64,7 +66,7 @@ const DoctorDashboard = () => {
             "Dashboard",
             "Edit Profile",
             "Approval Status",
-            "Your Schedule",
+            "Your Schedule", // Add "Your Schedule" to the menu
             "Doctor List",
             "Patients",
             "Appointments",
@@ -83,7 +85,6 @@ const DoctorDashboard = () => {
 
       {/* Main Content */}
       <div className="main-content">
-        {/* Navbar */}
         <div className="Doctor-navbar">
           <ul>
             <li>
@@ -109,7 +110,7 @@ const DoctorDashboard = () => {
             <>
               <div className="card">
                 <h2>Appointments</h2>
-                <p>2 </p>
+                <p>2</p>
               </div>
               <div className="card">
                 <h2>Total Patients</h2>
@@ -119,12 +120,6 @@ const DoctorDashboard = () => {
                 <h2>Total Slots</h2>
                 <p>3 slots</p>
               </div>
-
-              <div className="card">
-                <h2>Total Slots</h2>
-                <p>3 slots</p>
-              </div>
-              
             </>
           )}
 
@@ -132,7 +127,11 @@ const DoctorDashboard = () => {
             <EditProfile doctorProfile={doctorProfile} setDoctorProfile={setDoctorProfile} />
           )}
 
-          {selectedMenu !== "Dashboard" && selectedMenu !== "Edit Profile" && (
+          {selectedMenu === "Your Schedule" && <YourSchedule />} {/* Render YourSchedule here */}
+
+          {selectedMenu === "Doctor List" && <DoctorList />} {/* Render DoctorList */}
+
+          {selectedMenu !== "Dashboard" && selectedMenu !== "Edit Profile" && selectedMenu !== "Your Schedule" && selectedMenu !== "Doctor List" &&(
             <div className="dynamic-content">
               <p>
                 Showing details for: <strong>{selectedMenu}</strong>
@@ -146,3 +145,4 @@ const DoctorDashboard = () => {
 };
 
 export default DoctorDashboard;
+  

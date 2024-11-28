@@ -9,6 +9,7 @@ import AdminLogin from './components/Login/AdminLogin';
 import ForgotPassword from './components/Login/ForgotPassword';
 import DoctorDashboard from './components/Dashborad/DoctorDashboard';
 import EditProfile from './components/Dashborad/EditProfile';
+import YourSchedule from './components/Dashborad/YourSchedule';
 
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
         <Route path="/doctor-dashboard" element={<DoctorDashboard />}/>
 
         <Route path="/edit-profile" element={<EditProfile />} />
+
+        <Route path="/yourSchedule" element={<YourSchedule />} />
+
 
 
 
