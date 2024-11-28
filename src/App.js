@@ -10,8 +10,8 @@ import ForgotPassword from './components/Login/ForgotPassword';
 import DoctorDashboard from './components/Dashborad/DoctorDashboard';
 import EditProfile from './components/Dashborad/EditProfile';
 import YourSchedule from './components/Dashborad/YourSchedule';
-
-
+import UserDashboard from './components/UserDashboard/UserDashboard';
+import CreateAppointment from './components/UserDashboard/CreateAppointment';
 function App() {
   return (
     <BrowserRouter>
@@ -38,8 +38,9 @@ function App() {
 
         <Route path="/yourSchedule" element={<YourSchedule />} />
 
+        <Route path="/User-dashboard" element={<UserDashboard />}/>
 
-
+        <Route path="/CreateAppointment" element={<CreateAppointment />}/>
 
 
 
