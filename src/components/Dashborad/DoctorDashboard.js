@@ -5,6 +5,7 @@ import "./DoctorDashboard.css";
 import EditProfile from "./EditProfile";
 import YourSchedule from "./YourSchedule"; 
 import DoctorList from "./DoctorList"; // Import the YourSchedule component
+import Patients from "./Patients";
 
 const DoctorDashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
@@ -131,7 +132,9 @@ const DoctorDashboard = () => {
 
           {selectedMenu === "Doctor List" && <DoctorList />} {/* Render DoctorList */}
 
-          {selectedMenu !== "Dashboard" && selectedMenu !== "Edit Profile" && selectedMenu !== "Your Schedule" && selectedMenu !== "Doctor List" &&(
+          {selectedMenu === "Patients" && <Patients/>} 
+
+          {selectedMenu !== "Dashboard" && selectedMenu !== "Edit Profile" && selectedMenu !== "Your Schedule" && selectedMenu !== "Doctor List" &&selectedMenu !== "Your Schedule" && selectedMenu !== "Doctor List" && selectedMenu !== "Patients"&&(
             <div className="dynamic-content">
               <p>
                 Showing details for: <strong>{selectedMenu}</strong>
