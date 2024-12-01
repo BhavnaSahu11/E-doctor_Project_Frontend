@@ -10,23 +10,9 @@ const WelcomePage = () => {
   };
 
   return (
-    <div className="welcome-page" style={{
-      backgroundImage: 'url("assets/img/background1.png")', // Path to your background image
-      backgroundSize: 'cover', // Make the background cover the entire container
-      backgroundRepeat: 'no-repeat', // Prevents repeating of the background image
-      backgroundPosition: 'center', // Centers the image
-      width: '100vw', // Full viewport width
-      height: '100vh', // Full viewport height
-    }}>
+    <div className="welcome-page">
   
-      <main id="main"> {/*style={{
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Semi-transparent white background
-    borderRadius: '10px', // Optional: Adds rounded corners
-    padding: '20px', // Optional: Adds some spacing
-    width: '90%', // Adjust width as needed
-    margin: '0 auto', // Centers the main section horizontally
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Adds a subtle shadow
-  }} */} 
+      <main id="main"> {} 
   
         <section id="services" className="services section-bg">
           <div className="container-home" data-aos="fade-up" >
@@ -38,10 +24,10 @@ const WelcomePage = () => {
                 {/* Admin Card */}
                 <div 
                   className="detail_1" 
-                  style={{ backgroundColor: 'rgb(238, 236, 138)', marginRight: '5%' }}
+                  style={{ backgroundColor: ' #233852', marginRight: '5%' }}
                 >
                   <h2 
-                    style={{ fontWeight: 'bolder', fontSize: '35px', fontFamily: 'aladin', marginTop: '5%', color: 'rgb(7, 46, 49)' }}
+                    style={{ fontWeight: 'bolder', fontSize: '35px', fontFamily: 'aladin', marginTop: '5%', color: '#fff' }}
                   >
                     Admin Login
                   </h2>
@@ -60,10 +46,10 @@ const WelcomePage = () => {
                 {/* Doctor Card */}
                 <div 
                   className="detail_2" 
-                  style={{ backgroundColor: 'rgb(238, 236, 138)', marginRight: '5%' }}
+                  style={{ backgroundColor: ' #233852', marginRight: '5%' }}
                 >
                   <h2 
-                    style={{ fontWeight: 'bolder', fontSize: '35px', fontFamily: 'aladin', marginTop: '5%', color: 'rgb(7, 46, 49)' }}
+                    style={{ fontWeight: 'bolder', fontSize: '35px', fontFamily: 'aladin', marginTop: '5%', color: '#fff' }}
                   >
                     Doctor Login
                   </h2>
@@ -82,10 +68,10 @@ const WelcomePage = () => {
                 {/* User Card */}
                 <div 
                   className="detail_3" 
-                  style={{ backgroundColor: 'rgb(238, 236, 138)', marginRight: '5%' }}
+                  style={{ backgroundColor: ' #233852', marginRight: '5%' }}
                 >
                   <h2 
-                    style={{ fontWeight: 'bolder', fontSize: '35px', fontFamily: 'aladin', marginTop: '5%', color: 'rgb(7, 46, 49)' }}
+                    style={{ fontWeight: 'bolder', fontSize: '35px', fontFamily: 'aladin', marginTop: '5%', color: '#fff' }}
                   >
                     User Login
                   </h2>

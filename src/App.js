@@ -12,6 +12,7 @@ import EditProfile from './components/Dashborad/EditProfile';
 import YourSchedule from './components/Dashborad/YourSchedule';
 import UserDashboard from './components/UserDashboard/UserDashboard';
 import CreateAppointment from './components/UserDashboard/CreateAppointment';
+import DoctorList from './components/Dashborad/DoctorList';
 function App() {
   return (
     <BrowserRouter>
@@ -27,7 +28,8 @@ function App() {
         
         {/* Doctor login */}
         <Route path="/doctor-login" element={<DoctorLogin />} />  {/* Doctor Login route */}
-        
+        <Route path="/doctor-list" element={<DoctorList />}/>
+
         <Route path="/registration" element={<Registration />} />  {/* Registration route */}
 
         <Route path="/forgot-password" element={<ForgotPassword />}/>

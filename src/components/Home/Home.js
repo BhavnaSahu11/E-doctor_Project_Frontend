@@ -3,38 +3,63 @@ import './Home.css';
 
 const Home = () => {
   return (
-    <div className="unique-home" style={{
-      backgroundImage: 'url("assets/img/background.png")', // Path to your background image
-      backgroundSize: 'cover', // Makes the image cover the entire container
-      backgroundRepeat: 'no-repeat', // Prevents the image from repeating
-      backgroundPosition: 'center', // Centers the image
-      width: '100vw', // Full viewport width
-      height: '100vh', // Full viewport height
-      display: 'flex',
-      flexDirection: 'column', // Stacks the content vertically
-      alignItems: 'center', // Centers the content horizontally
-      justifyContent: 'center', // Centers the content vertically
-    }}>
-      <nav className="e-doctor-nav">
+    <div >
+     <nav className="main-nav">
         <ul>
-          <li><a href="default.asp">E-Doctor</a></li>
-        </ul>
-      </nav>
-
-      {/* Remaining Items Nav */}
-      <nav className="main-nav">
-        <ul>
+        <li><a href="#" className='home-name'>E-Doctor</a></li>
           <li><a href="./">Home</a></li>
           <li><a href="#">Feedback List</a></li>
           <li><a href="./WelcomePage">Login</a></li>
           <li><a href="/registration">Registration</a></li>
         </ul>
       </nav>
-      {/* <div className="circle" style={{ borderRadius: '0%', backgroundColor: 'black', padding: '10%' }}>
-                    <img src="assets/img/admin.png" width="130" height="130" alt="Admin" />
-                  </div> */}
-                  
-    </div>
+      <div>
+        <img 
+          src="assets/img/hhome-bg.png" 
+          alt="E-Doctor Banner" 
+          className="home-bg" 
+        />
+      </div>
+      <div className="categories-container">
+      {/* Section Header */}
+      <h2 className="section-title">
+        Explore by our <span className="highlight">category</span>
+      </h2>
+
+      {/* Categories Grid */}
+      <div className="categories-grid">
+        {/* Category Cards */}
+        <div className="category-card">
+          <div className="icon-container">
+            <img src="assets/img/maledoctor.png" alt="Doctor Icon" className="icon" />
+          </div>
+          <p>Find popular specialist doctors.</p>
+        </div>
+        <div className="category-card active">
+          <div className="icon-container">
+            <img src="assets/img/Appointment.png" alt="Lab Icon" className="icon" />
+          </div>
+          <p>Book Appointment Online.</p>
+        </div>
+        <div className="category-card">
+          <div className="icon-container">
+            <img src="assets/img/login.png" alt="Emergency Icon" className="icon" />
+          </div>
+          <p>Profile Management.</p>
+        </div>
+        <div className="category-card">
+          <div className="icon-container">
+            <img src="assets/img/Prescription.png" alt="Insurance Icon" className="icon" />
+          </div>
+          <p>Prescription Alerts.</p>
+        </div>
+      </div>
+      </div>
+
+  <div className='foot'>
+  <footer> <p>© 2024 E-Doctor. All rights reserved.</p></footer>
+  </div>
+  </div>
     
   );
 };

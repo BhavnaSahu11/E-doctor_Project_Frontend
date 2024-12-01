@@ -4,8 +4,8 @@ import axios from "axios";
 import "./UserDashboard.css";
 import EditProfile from "../Dashborad/EditProfile";
 import CreateAppointment from "./CreateAppointment";
-// import Appointments from "./Appointments";
-// import PrescriptionList from "./PrescriptionList";
+import DoctorList from "../Dashborad/DoctorList";
+
 
 const UserDashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
@@ -123,14 +123,16 @@ const UserDashboard = () => {
           )}
 
           {selectedMenu === "Edit Profile" && (
+         
             <EditProfile userProfile={userProfile} setUserProfile={setUserProfile} />
           )}
 
-          {selectedMenu === "Appointments" && <CreateAppointment />} 
 
+          {selectedMenu === "Appointments" && <CreateAppointment />} 
+          {selectedMenu === "Doctors" && <DoctorList />}
           {/* {selectedMenu === "Prescriptions" && <PrescriptionList />} Render PrescriptionList */}
 
-          {selectedMenu !== "Dashboard" && selectedMenu !== "Edit Profile" && selectedMenu !== "Appointments" && selectedMenu !== "Prescriptions" && (
+          {selectedMenu !== "Dashboard"  && selectedMenu !== "Appointments" && selectedMenu !== "Prescriptions" && (
             <div className="dynamic-content">
               <p>
                 Showing details for: <strong>{selectedMenu}</strong>
