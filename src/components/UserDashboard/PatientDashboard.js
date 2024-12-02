@@ -1,27 +1,26 @@
-// src/components/UserDashboard.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./UserDashboard.css";
-import EditProfile from "../Dashborad/EditProfile";
+import "./PatientDashboard.css";
+import EditPatientProfile from "./EditPatientProfile";
 import CreateAppointment from "./CreateAppointment";
-import DoctorList from "../Dashborad/DoctorList";
+import DoctorList from "./DoctorList";
 
-
-const UserDashboard = () => {
+const PatientDashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
   const [userEmail, setUserEmail] = useState("");
   const [userProfile, setUserProfile] = useState({
-    userName: "",
-    age: "",
-    location: "",
+    patientName: "",
     mobileNo: "",
-    insuranceDetails: "",
+    bloodGroup: "",
+    gender: "",
+    age: "",
+    address: "",
   });
 
-  // Fetch user's email
-  useEffect(() => {
+  // Function to fetch user's email
+  const fetchUserEmail = () => {
     axios
-      .get("http://localhost:8080/api/user/get-welcome-email")
+      .get("http://localhost:8080/api/patient/get-welcome-email")
       .then((response) => {
         setUserEmail(response.data.email || "Unknown Email");
       })
@@ -29,18 +28,24 @@ const UserDashboard = () => {
         console.error("Error fetching email:", error);
         setUserEmail("Error fetching email");
       });
-  }, []);
+  };
 
-  // Fetch user's profile
-  useEffect(() => {
+  // Function to fetch user's profile
+  const fetchUserProfile = () => {
     axios
-      .get("http://localhost:8080/api/user/profile")
+      .get("http://localhost:8080/api/patient/profile")
       .then((response) => {
-        setUserProfile(response.data); // Populate userProfile with backend data
+        setUserProfile(response.data);
       })
       .catch((error) => {
         console.error("Error fetching profile:", error);
       });
+  };
+
+  // Fetch data on component load
+  useEffect(() => {
+    fetchUserEmail();
+    fetchUserProfile();
   }, []);
 
   const handleMenuClick = (menu) => {
@@ -58,7 +63,7 @@ const UserDashboard = () => {
             className="profile-picture"
           />
           <p className="user-name">
-            {userProfile.userName || "Loading Name..."}
+            {userProfile.patientName || "Loading Name..."}
           </p>
         </div>
         <ul className="menu-list">
@@ -67,7 +72,7 @@ const UserDashboard = () => {
             "Edit Profile",
             "Appointments",
             "Prescriptions",
-            "Doctors",
+            "Doctors List",
             "Health Records",
             "Settings",
           ].map((menu) => (
@@ -87,7 +92,7 @@ const UserDashboard = () => {
         <div className="User-navbar">
           <ul>
             <li>
-              <a href="/user-dashboard">Home</a>
+              <a href="/patient-dashboard">Home</a>
             </li>
             <li>
               <span>Welcome {userEmail || "Loading..."}</span>
@@ -123,26 +128,33 @@ const UserDashboard = () => {
           )}
 
           {selectedMenu === "Edit Profile" && (
-         
-            <EditProfile userProfile={userProfile} setUserProfile={setUserProfile} />
+            <EditPatientProfile
+              refreshData={() => {
+                fetchUserEmail();
+                fetchUserProfile();
+              }}
+            />
           )}
 
+          {selectedMenu === "Appointments" && <CreateAppointment />}
 
-          {selectedMenu === "Appointments" && <CreateAppointment />} 
-          {selectedMenu === "Doctors" && <DoctorList />}
-          {/* {selectedMenu === "Prescriptions" && <PrescriptionList />} Render PrescriptionList */}
+          {selectedMenu === "Doctors List" && <DoctorList />} {/* Render Doctor List */}
 
-          {selectedMenu !== "Dashboard"  && selectedMenu !== "Appointments" && selectedMenu !== "Prescriptions" && (
-            <div className="dynamic-content">
-              <p>
-                Showing details for: <strong>{selectedMenu}</strong>
-              </p>
-            </div>
-          )}
+          {/* If menu is not Dashboard, Edit Profile, Appointments or Doctor List */}
+          {selectedMenu !== "Dashboard" &&
+            selectedMenu !== "Edit Profile" &&
+            selectedMenu !== "Appointments" && 
+            selectedMenu !== "Doctors List" &&(
+              <div className="dynamic-content">
+                <p>
+                  Showing details for: <strong>{selectedMenu}</strong>
+                </p>
+              </div>
+            )}
         </div>
       </div>
     </div>
   );
 };
 
-export default UserDashboard;
+export default PatientDashboard;

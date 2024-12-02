@@ -10,9 +10,9 @@ import ForgotPassword from './components/Login/ForgotPassword';
 import DoctorDashboard from './components/Dashborad/DoctorDashboard';
 import EditProfile from './components/Dashborad/EditProfile';
 import YourSchedule from './components/Dashborad/YourSchedule';
-import UserDashboard from './components/UserDashboard/UserDashboard';
-import CreateAppointment from './components/UserDashboard/CreateAppointment';
-import DoctorList from './components/Dashborad/DoctorList';
+import PatientDashboard from './components/UserDashboard/PatientDashboard';
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -28,8 +28,7 @@ function App() {
         
         {/* Doctor login */}
         <Route path="/doctor-login" element={<DoctorLogin />} />  {/* Doctor Login route */}
-        <Route path="/doctor-list" element={<DoctorList />}/>
-
+        
         <Route path="/registration" element={<Registration />} />  {/* Registration route */}
 
         <Route path="/forgot-password" element={<ForgotPassword />}/>
@@ -40,9 +39,10 @@ function App() {
 
         <Route path="/yourSchedule" element={<YourSchedule />} />
 
-        <Route path="/User-dashboard" element={<UserDashboard />}/>
+        <Route path="/user-dashboard" element={<PatientDashboard />}/>
 
-        <Route path="/CreateAppointment" element={<CreateAppointment />}/>
+
+
 
 
 
