@@ -1,39 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import './CreateAppointment.css'; // Ensure this path is correct
 
-const CreateAppointment = () => {
-  // State to hold form data
+const CreateAppointment = ({ doctorEmail, doctorAvailability, onBack }) => {
   const [formData, setFormData] = useState({
-    doctorEmail: '',
-    appointmentDate: '',
-    reason: '',
-    remarks: ''
+    doctorEmail: doctorEmail, // Pre-fill with the passed doctor's email
+    appointmentDate: "",
+    reason: "",
+    remarks: "",
   });
 
-  // State for error and success handling
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
-  // Handle form data change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
-  // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Check if appointment date is within doctor's available range
+    const appointmentDate = new Date(formData.appointmentDate);
+    const availableFromDate = new Date(doctorAvailability.availableFromDate);
+    const availableEndDate = new Date(doctorAvailability.availableEndDate);
+
+    if (appointmentDate < availableFromDate || appointmentDate > availableEndDate) {
+      setError(`Appointment date must be between Doctor Schedule That is ${doctorAvailability.availableFromDate} and ${doctorAvailability.availableEndDate}.`);
+      return;
+    }
 
     const appointmentData = {
       doctorEmail: formData.doctorEmail,
       appointmentDate: formData.appointmentDate,
       reason: formData.reason,
-      remarks: formData.remarks
+      remarks: formData.remarks,
     };
 
-    // Send appointment data to the backend
     fetch("http://localhost:8080/appointments/book", {
       method: "POST",
       headers: {
@@ -41,43 +47,34 @@ const CreateAppointment = () => {
       },
       body: JSON.stringify(appointmentData),
     })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Appointment created successfully:", data);
-      // Set success message
-      setSuccessMessage("Appointment created successfully!");
-      // Clear the form after submission
-      setFormData({
-        doctorEmail: '',
-        appointmentDate: '',
-        reason: '',
-        remarks: ''
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSuccessMessage("Appointment created successfully!");
+        setFormData({
+          doctorEmail: doctorEmail, // Reset doctor email
+          appointmentDate: "",
+          reason: "",
+          remarks: "",
+        });
+        setError(null);
+        setTimeout(() => setSuccessMessage(null), 3000);
+      })
+      .catch((error) => {
+        console.error("Error creating appointment:", error);
+        setError("Failed to create appointment. Please try again.");
+        setSuccessMessage(null);
       });
-      setError(null); // Clear any previous errors
-
-      // Optionally hide the success message after 3 seconds
-      setTimeout(() => setSuccessMessage(null), 3000);
-    })
-    .catch((error) => {
-      console.error("Error creating appointment:", error);
-      setError("Invalid Doctor Email to create appointment.");
-      setSuccessMessage(null); // Clear any previous success message
-    });
   };
 
   return (
     <div className="create-appointment-container">
       <h2>Create Appointment</h2>
-
-      {/* Success message */}
       {successMessage && <div className="success-message">{successMessage}</div>}
-
-      {/* Error message */}
       {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit}>
@@ -88,8 +85,7 @@ const CreateAppointment = () => {
             id="doctorEmail"
             name="doctorEmail"
             value={formData.doctorEmail}
-            onChange={handleChange}
-            required
+            readOnly // Make the field read-only
           />
         </div>
 
@@ -128,6 +124,9 @@ const CreateAppointment = () => {
         </div>
 
         <button type="submit">Book Appointment</button>
+        <button type="button" onClick={onBack} className="back-button">
+          Back to Doctor List
+        </button>
       </form>
     </div>
   );

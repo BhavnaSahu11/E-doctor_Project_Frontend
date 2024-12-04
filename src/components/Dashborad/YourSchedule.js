@@ -4,8 +4,8 @@ import './YourSchedule.css';
 
 const YourSchedule = () => {
   const [availability, setAvailability] = useState({
-    appointmentFromdate: "",
-    appointmentEnddate: "",
+    availableFromDate: "",
+    availableEndDate: "",
     amSlotTiming: "",
     pmSlotTiming: "",
   });
@@ -40,14 +40,14 @@ const YourSchedule = () => {
   // Validation logic
   const validateForm = () => {
     const newErrors = {};
-    const { appointmentFromdate, appointmentEnddate, amSlotTiming, pmSlotTiming } = availability;
+    const { availableFromDate, availableEndDate, amSlotTiming, pmSlotTiming } = availability;
 
-    if (!appointmentFromdate || !appointmentEnddate || !amSlotTiming || !pmSlotTiming) {
+    if (!availableFromDate || !availableEndDate || !amSlotTiming || !pmSlotTiming) {
       newErrors.required = "All fields are required!";
     }
 
-    if (appointmentFromdate && appointmentEnddate) {
-      if (new Date(appointmentFromdate) > new Date(appointmentEnddate)) {
+    if (availableFromDate && availableEndDate) {
+      if (new Date(availableFromDate) > new Date(availableEndDate)) {
         newErrors.dateRange = "From Date cannot be later than To Date.";
       }
     }
@@ -65,7 +65,7 @@ const YourSchedule = () => {
     axios
       .put("http://localhost:8080/api/doctor/availability", availability)
       .then((response) => {
-        setAvailability(response.data);
+        setAvailability(response.data); // Update state with the new data
         setIsEditing(false); // Exit editing mode
         setSuccessMessage("Changes saved successfully!"); // Show success message
         setTimeout(() => setSuccessMessage(""), 3000); // Hide success message after 3 seconds
@@ -73,6 +73,18 @@ const YourSchedule = () => {
       .catch((error) => {
         console.error("Error updating availability:", error);
       });
+  };
+
+  // Handle entering edit mode
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  // Handle cancel edit
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setErrors({});
+    // Optionally, reset the form to initial values if needed
   };
 
   if (loading) {
@@ -87,18 +99,18 @@ const YourSchedule = () => {
       {!isEditing ? (
         <div>
           <p>
-            <strong>From:</strong> {availability.appointmentFromdate}
+            <strong>From:</strong> {availability.availableFromDate || "Not Set"}
           </p>
           <p>
-            <strong>To:</strong> {availability.appointmentEnddate}
+            <strong>To:</strong> {availability.availableEndDate || "Not Set"}
           </p>
           <p>
-            <strong>AM Slot:</strong> {availability.amSlotTiming}
+            <strong>AM Slot:</strong> {availability.amSlotTiming || "Not Set"}
           </p>
           <p>
-            <strong>PM Slot:</strong> {availability.pmSlotTiming}
+            <strong>PM Slot:</strong> {availability.pmSlotTiming || "Not Set"}
           </p>
-          <button className="edit-btn" onClick={() => setIsEditing(true)}>
+          <button className="edit-btn" onClick={handleEditClick}>
             Edit Schedule
           </button>
         </div>
@@ -111,8 +123,8 @@ const YourSchedule = () => {
                 <label>From Date</label>
                 <input
                   type="date"
-                  name="appointmentFromdate"
-                  value={availability.appointmentFromdate}
+                  name="availableFromDate"
+                  value={availability.availableFromDate}
                   onChange={handleInputChange}
                   className={errors.required ? "input-error" : ""}
                 />
@@ -121,8 +133,8 @@ const YourSchedule = () => {
                 <label>To Date</label>
                 <input
                   type="date"
-                  name="appointmentEnddate"
-                  value={availability.appointmentEnddate}
+                  name="availableEndDate"
+                  value={availability.availableEndDate}
                   onChange={handleInputChange}
                   className={errors.required ? "input-error" : ""}
                 />
@@ -154,7 +166,7 @@ const YourSchedule = () => {
                 <button
                   className="cancel-btn"
                   type="button"
-                  onClick={() => setIsEditing(false)}
+                  onClick={handleCancelEdit}
                 >
                   Cancel
                 </button>

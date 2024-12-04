@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PatientDashboard.css";
 import EditPatientProfile from "./EditPatientProfile";
-import CreateAppointment from "./CreateAppointment";
 import DoctorList from "./DoctorList";
 
 const PatientDashboard = () => {
@@ -70,7 +69,7 @@ const PatientDashboard = () => {
           {[
             "Dashboard",
             "Edit Profile",
-            "Appointments",
+            "Your Appointment",
             "Prescriptions",
             "Doctors List",
             "Health Records",
@@ -136,7 +135,6 @@ const PatientDashboard = () => {
             />
           )}
 
-          {selectedMenu === "Appointments" && <CreateAppointment />}
 
           {selectedMenu === "Doctors List" && <DoctorList />} {/* Render Doctor List */}
 
