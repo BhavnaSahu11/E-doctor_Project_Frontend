@@ -4,8 +4,11 @@ import axios from "axios";
 import "./DoctorDashboard.css";
 import EditProfile from "./EditProfile";
 import YourSchedule from "./YourSchedule"; 
-import DoctorList from "./DoctorList"; // Import the YourSchedule component
 import Patients from "./Patients";
+import ApproveAppointments from "./ApproveAppointments"; // Import the new component
+import Appointments from "./Appointments"; // Import the Appointments component
+
+
 
 const DoctorDashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
@@ -66,11 +69,10 @@ const DoctorDashboard = () => {
           {[
             "Dashboard",
             "Edit Profile",
-            "Approval Status",
-            "Your Schedule", // Add "Your Schedule" to the menu
-            "Doctor List",
+            "Your Schedule",
+            "Approve Appointments",  // New Menu Item
             "Patients",
-            "Appointments",
+            "Accepted Appointments",
             "Add Prescriptions",
           ].map((menu) => (
             <li
@@ -102,7 +104,6 @@ const DoctorDashboard = () => {
 
         {/* Header */}
         <div className="header">
-          <h1>{selectedMenu}</h1>
         </div>
 
         {/* Content */}
@@ -128,19 +129,16 @@ const DoctorDashboard = () => {
             <EditProfile doctorProfile={doctorProfile} setDoctorProfile={setDoctorProfile} />
           )}
 
-          {selectedMenu === "Your Schedule" && <YourSchedule />} {/* Render YourSchedule here */}
+          {selectedMenu === "Your Schedule" && <YourSchedule />}
 
-          {selectedMenu === "Doctor List" && <DoctorList />} {/* Render DoctorList */}
+          {selectedMenu === "Approve Appointments" && <ApproveAppointments />} {/* Approve Appointments here */}
 
-          {selectedMenu === "Patients" && <Patients/>} 
+          {selectedMenu === "Accepted Appointments" && <Appointments />} 
 
-          {selectedMenu !== "Dashboard" && selectedMenu !== "Edit Profile" && selectedMenu !== "Your Schedule" && selectedMenu !== "Doctor List" &&selectedMenu !== "Your Schedule" && selectedMenu !== "Doctor List" && selectedMenu !== "Patients"&&(
-            <div className="dynamic-content">
-              <p>
-                Showing details for: <strong>{selectedMenu}</strong>
-              </p>
-            </div>
-          )}
+
+          {selectedMenu === "Patients" && <Patients />}
+
+          
         </div>
       </div>
     </div>
@@ -148,4 +146,3 @@ const DoctorDashboard = () => {
 };
 
 export default DoctorDashboard;
-  

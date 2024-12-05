@@ -3,6 +3,9 @@ import axios from "axios";
 import "./PatientDashboard.css";
 import EditPatientProfile from "./EditPatientProfile";
 import DoctorList from "./DoctorList";
+import AppointmentsList from "./AppointmentsList"; // Import the component
+
+
 
 const PatientDashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
@@ -69,7 +72,7 @@ const PatientDashboard = () => {
           {[
             "Dashboard",
             "Edit Profile",
-            "Your Appointment",
+            "My Appointments",
             "Prescriptions",
             "Doctors List",
             "Health Records",
@@ -91,7 +94,7 @@ const PatientDashboard = () => {
         <div className="User-navbar">
           <ul>
             <li>
-              <a href="/patient-dashboard">Home</a>
+              <a href="/user-dashboard">Home</a>
             </li>
             <li>
               <span>Welcome {userEmail || "Loading..."}</span>
@@ -102,11 +105,7 @@ const PatientDashboard = () => {
           </ul>
         </div>
 
-        {/* Header */}
-        <div className="header">
-          <h1>{selectedMenu}</h1>
-        </div>
-
+      
         {/* Content */}
         <div className="cards-container">
           {selectedMenu === "Dashboard" && (
@@ -138,10 +137,13 @@ const PatientDashboard = () => {
 
           {selectedMenu === "Doctors List" && <DoctorList />} {/* Render Doctor List */}
 
+          {selectedMenu === "My Appointments" && <AppointmentsList />} {/* Render Appointments List */}
+
+
           {/* If menu is not Dashboard, Edit Profile, Appointments or Doctor List */}
           {selectedMenu !== "Dashboard" &&
             selectedMenu !== "Edit Profile" &&
-            selectedMenu !== "Appointments" && 
+            selectedMenu !== "My Appointments" && 
             selectedMenu !== "Doctors List" &&(
               <div className="dynamic-content">
                 <p>
