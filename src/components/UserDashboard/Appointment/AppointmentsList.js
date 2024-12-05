@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './AppointmentsList.css'
+import styles from "./AppointmentsList.module.css";
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -17,9 +17,7 @@ const Appointments = () => {
       .catch((error) => console.error(error.message));
   }, []);
 
-  // Handler for cancelling appointments
   const cancelAppointment = (appointmentId) => {
-    // Replace with actual API endpoint for cancelling appointments
     fetch(`http://localhost:8080/api/patient/appointments/${appointmentId}`, {
       method: "DELETE",
     })
@@ -37,9 +35,10 @@ const Appointments = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className={styles.appointmentsContainer}>
+      <h2>My Appointments</h2>
       {appointments.length > 0 ? (
-        <table border="1" cellPadding="10" cellSpacing="0" style={{ width: "100%" }}>
+        <table className={styles.appointmentsTable}>
           <thead>
             <tr>
               <th>Doctor Email</th>
@@ -55,17 +54,19 @@ const Appointments = () => {
                 <td>{appointment.doctorEmail}</td>
                 <td>{appointment.appointmentDate}</td>
                 <td>{appointment.reason}</td>
-                <td>{appointment.status || "Pending"}</td>
+                <td>
+                  <span
+                    className={`${styles.statusBox} ${
+                      styles[appointment.status || "PENDING"]
+                    }`}
+                  >
+                    {appointment.status || "PENDING"}
+                  </span>
+                </td>
                 <td>
                   <button
                     onClick={() => cancelAppointment(appointment.id)}
-                    style={{
-                      backgroundColor: "red",
-                      color: "white",
-                      border: "none",
-                      padding: "5px 10px",
-                      cursor: "pointer",
-                    }}
+                    className={styles.cancelButton}
                   >
                     Cancel
                   </button>
@@ -75,7 +76,7 @@ const Appointments = () => {
           </tbody>
         </table>
       ) : (
-        <p>No appointments found.</p>
+        <p className={styles.emptyMessage}>No appointments found.</p>
       )}
     </div>
   );

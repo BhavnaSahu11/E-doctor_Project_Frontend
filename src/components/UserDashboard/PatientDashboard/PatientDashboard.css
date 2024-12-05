@@ -1,0 +1,30 @@
+.User-navbar {
+  background-color: #34495e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.User-navbar ul {
+  list-style: none;
+  display: flex;
+ justify-content: flex-end;
+  align-items: center;
+}
+
+.User-navbar ul li {
+  margin: 0 10px;
+}
+
+.User-navbar ul a,
+.User-navbar ul span {
+  text-decoration: none;
+  color: #ecf0f1;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.User-navbar ul a:hover {
+  color: #1abc9c;
+}

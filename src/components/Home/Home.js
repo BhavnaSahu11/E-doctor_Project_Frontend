@@ -3,10 +3,10 @@ import './Home.css';
 
 const Home = () => {
   return (
-    <div >
-     <nav className="main-nav">
+    <div className="home-container">
+      <nav className="main-nav">
         <ul>
-        <li><a href="#" className='home-name'>E-Doctor</a></li>
+          <li><a href="#" className='home-name'>E-Doctor</a></li>
           <li><a href="./">Home</a></li>
           <li><a href="#">Feedback List</a></li>
           <li><a href="./WelcomePage">Login</a></li>
@@ -21,46 +21,40 @@ const Home = () => {
         />
       </div>
       <div className="categories-container">
-      {/* Section Header */}
-      <h2 className="section-title">
-        Explore by our <span className="highlight">category</span>
-      </h2>
-
-      {/* Categories Grid */}
-      <div className="categories-grid">
-        {/* Category Cards */}
-        <div className="category-card">
-          <div className="icon-container">
-            <img src="assets/img/maledoctor.png" alt="Doctor Icon" className="icon" />
+        <h2 className="section-title">
+          Explore by our <span className="highlight">category</span>
+        </h2>
+        <div className="categories-grid">
+          <div className="category-card">
+            <div className="icon-container">
+              <img src="assets/img/maledoctor.png" alt="Doctor Icon" className="icon" />
+            </div>
+            <p>Find popular specialist doctors.</p>
           </div>
-          <p>Find popular specialist doctors.</p>
-        </div>
-        <div className="category-card active">
-          <div className="icon-container">
-            <img src="assets/img/Appointment.png" alt="Lab Icon" className="icon" />
+          <div className="category-card active">
+            <div className="icon-container">
+              <img src="assets/img/Appointment.png" alt="Lab Icon" className="icon" />
+            </div>
+            <p>Book Appointment Online.</p>
           </div>
-          <p>Book Appointment Online.</p>
-        </div>
-        <div className="category-card">
-          <div className="icon-container">
-            <img src="assets/img/login.png" alt="Emergency Icon" className="icon" />
+          <div className="category-card">
+            <div className="icon-container">
+              <img src="assets/img/login.png" alt="Emergency Icon" className="icon" />
+            </div>
+            <p>Profile Management.</p>
           </div>
-          <p>Profile Management.</p>
-        </div>
-        <div className="category-card">
-          <div className="icon-container">
-            <img src="assets/img/Prescription.png" alt="Insurance Icon" className="icon" />
+          <div className="category-card">
+            <div className="icon-container">
+              <img src="assets/img/Prescription.png" alt="Insurance Icon" className="icon" />
+            </div>
+            <p>Prescription Alerts.</p>
           </div>
-          <p>Prescription Alerts.</p>
         </div>
       </div>
+      <div className='foot'>
+        <footer> <p>© 2024 E-Doctor. All rights reserved.</p></footer>
       </div>
-
-  <div className='foot'>
-  <footer> <p>© 2024 E-Doctor. All rights reserved.</p></footer>
-  </div>
-  </div>
-    
+    </div>
   );
 };
 

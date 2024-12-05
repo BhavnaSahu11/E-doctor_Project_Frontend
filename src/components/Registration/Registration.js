@@ -14,38 +14,34 @@ const Registration = () => {
   const [showErrors, setShowErrors] = useState(false); // Control visibility of error messages
   const navigate = useNavigate();
 
-// Set the background image on the body element
-useEffect(() => {
-  // Set background image dynamically
-  const bodyElement = document.body;
-  bodyElement.style.backgroundImage = "url('assets/img/regist1.png')"; // Path to the background image
-  bodyElement.style.backgroundSize = 'cover';
-  bodyElement.style.backgroundRepeat = 'no-repeat';
-  bodyElement.style.backgroundPosition = 'center';
-  bodyElement.style.height = '100vh';
-  bodyElement.style.margin = '0';
-  bodyElement.style.padding = '0';
+  // Set the background image on the body element
+  useEffect(() => {
+    const bodyElement = document.body;
+    bodyElement.style.backgroundImage = "url('assets/img/regist1.png')"; 
+    bodyElement.style.backgroundSize = 'cover';
+    bodyElement.style.backgroundRepeat = 'no-repeat';
+    bodyElement.style.backgroundPosition = 'center';
+    bodyElement.style.height = '100vh';
+    bodyElement.style.margin = '0';
+    bodyElement.style.padding = '0';
 
-  return () => {
-    // Cleanup styles on component unmount
-    bodyElement.style.backgroundImage = '';
-    bodyElement.style.backgroundSize = '';
-    bodyElement.style.backgroundRepeat = '';
-    bodyElement.style.backgroundPosition = '';
-    bodyElement.style.height = '';
-    bodyElement.style.margin = '';
-    bodyElement.style.padding = '';
-  };
-}, []);
+    return () => {
+      bodyElement.style.backgroundImage = '';
+      bodyElement.style.backgroundSize = '';
+      bodyElement.style.backgroundRepeat = '';
+      bodyElement.style.backgroundPosition = '';
+      bodyElement.style.height = '';
+      bodyElement.style.margin = '';
+      bodyElement.style.padding = '';
+    };
+  }, []);
 
-
-  // Clear error messages after 3 seconds
   useEffect(() => {
     if (showErrors && errorMessages.length > 0) {
       const timer = setTimeout(() => {
         setErrorMessages([]);
         setShowErrors(false);
-      }, 3000); // Error disappears after 3 seconds
+      }, 3000); 
 
       return () => clearTimeout(timer);
     }
@@ -54,7 +50,6 @@ useEffect(() => {
   const handleRegistration = async (e) => {
     e.preventDefault();
 
-    // Client-side validation
     if (password !== confirmPassword) {
       setErrorMessages(["Passwords don't match"]);
       setShowErrors(true);
@@ -67,35 +62,27 @@ useEffect(() => {
       return;
     }
 
-    // Send registration data to the backend
     try {
       const response = await axios.post('http://localhost:8080/api/auth/register', {
-        email: email.trim(), // Ensure no leading/trailing spaces
-        username: name.trim(), // Ensure no leading/trailing spaces
+        email: email.trim(),
+        username: name.trim(),
         password,
         confirmPassword,
-        role: role.toUpperCase() // Make sure the role is uppercase
+        role: role.toUpperCase()
       });
 
       if (response.data.status === 'OK'){
-           alert('Registration successful!');
-           if (role === 'user') {
-            navigate('/user-login'); // Redirect to doctor login if doctor role is selected
-          } else {
-            navigate('/doctor-login'); // Redirect to user login if user role is selected
-          }
+        alert('Registration successful!');
+        navigate(role === 'user' ? '/user-login' : '/doctor-login');
       }
-      // Redirect based on the selected role
-      
-
     } catch (error) {
       if (error.response && error.response.data) {
         const errorMessage = error.response.data.message;
         if (errorMessage === "Username already exists! Please log in.") {
-          setShowLoginPrompt(true); // Show the login prompt if username exists
+          setShowLoginPrompt(true);
         } else {
-          setErrorMessages([errorMessage]); // Handle other error messages
-          setShowErrors(true); // Show the error messages
+          setErrorMessages([errorMessage]);
+          setShowErrors(true);
         }
       } else {
         setErrorMessages(['An unexpected error occurred']);
@@ -108,14 +95,13 @@ useEffect(() => {
     <div className="registration-container">
       <h2>Registration</h2>
       {showLoginPrompt && (
-        <div className="login-prompt">
+        <div className="registration-login-prompt">
           <p>Email already exists! Please <a href="/doctor-login">Login here</a></p>
         </div>
       )}
       
-      {/* Display error messages above the Register button */}
       {showErrors && errorMessages.length > 0 && (
-        <div className="error-messages">
+        <div className="registration-error-messages">
           <ul>
             {errorMessages.map((err, index) => (
               <li key={index}>{err}</li>
@@ -187,7 +173,7 @@ useEffect(() => {
 
         <button type="submit">Register</button>
       </form>
-      <div className="login-link">
+      <div className="registration-login-link">
         <p>
           Already have an account?{' '}
           <a href={role === 'user' ? "/user-login" : "/doctor-login"}>Login here</a>

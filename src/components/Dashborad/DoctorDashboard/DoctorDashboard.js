@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./DoctorDashboard.css";
-import EditProfile from "./EditProfile";
-import YourSchedule from "./YourSchedule"; 
-import Patients from "./Patients";
-import ApproveAppointments from "./ApproveAppointments"; // Import the new component
-import Appointments from "./Appointments"; // Import the Appointments component
+import EditProfile from "../EditDoctorProfile/EditProfile";
+import YourSchedule from "../UpdateAvialblity/YourSchedule"; 
+import ApproveAppointments from "../ApproveAppoinments/ApproveAppointments"; // Import the new component
+import Appointments from "../ApproveAppoinments/Appointments"; // Import the Appointments component
 
 
 
@@ -71,7 +70,6 @@ const DoctorDashboard = () => {
             "Edit Profile",
             "Your Schedule",
             "Approve Appointments",  // New Menu Item
-            "Patients",
             "Accepted Appointments",
             "Add Prescriptions",
           ].map((menu) => (
@@ -136,7 +134,6 @@ const DoctorDashboard = () => {
           {selectedMenu === "Accepted Appointments" && <Appointments />} 
 
 
-          {selectedMenu === "Patients" && <Patients />}
 
           
         </div>

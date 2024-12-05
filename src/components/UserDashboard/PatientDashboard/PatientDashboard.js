@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PatientDashboard.css";
-import EditPatientProfile from "./EditPatientProfile";
-import DoctorList from "./DoctorList";
-import AppointmentsList from "./AppointmentsList"; // Import the component
-
+import EditPatientProfile from "../EditProfile/EditPatientProfile";
+import AppointmentsList from '../Appointment/AppointmentsList';
+import DoctorList from "../DoctorList/DoctorList";
 
 
 const PatientDashboard = () => {

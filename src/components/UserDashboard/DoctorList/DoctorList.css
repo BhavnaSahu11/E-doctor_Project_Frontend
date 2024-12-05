@@ -13,7 +13,7 @@
   .doctor-cards {
     display: flex;
     flex-wrap: wrap; /* Allows wrapping to a new row if space runs out */
-    gap: 70px; /* Adds space between the cards */
+    gap: 50px; /* Adds space between the cards */
     justify-content:center; /* Align items to the left, or use 'center' if needed */
     padding: 20px;
   }
@@ -22,7 +22,7 @@
     background: #fff;
     border: 2px solid #900; /* Match the red border in your example */
     border-radius: 10px;
-    width: 300px; /* Fixed width for the cards */
+    width: 250px; /* Fixed width for the cards */
     padding: 20px;
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

@@ -7,10 +7,10 @@ import UserLogin from './components/Login/UserLogin';  // Import UserLogin compo
 import DoctorLogin from './components/Login/DoctorLogin';
 import AdminLogin from './components/Login/AdminLogin';
 import ForgotPassword from './components/Login/ForgotPassword';
-import DoctorDashboard from './components/Dashborad/DoctorDashboard';
-import EditProfile from './components/Dashborad/EditProfile';
-import YourSchedule from './components/Dashborad/YourSchedule';
-import PatientDashboard from './components/UserDashboard/PatientDashboard';
+import DoctorDashboard from './components/Dashborad/DoctorDashboard/DoctorDashboard';
+import EditProfile from './components/Dashborad/EditDoctorProfile/EditProfile';
+import YourSchedule from './components/Dashborad/UpdateAvialblity/YourSchedule';
+import PatientDashboard from './components/UserDashboard/PatientDashboard/PatientDashboard';
 
 
 function App() {
