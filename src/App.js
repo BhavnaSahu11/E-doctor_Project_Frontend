@@ -11,7 +11,7 @@ import DoctorDashboard from './components/Dashborad/DoctorDashboard/DoctorDashbo
 import EditProfile from './components/Dashborad/EditDoctorProfile/EditProfile';
 import YourSchedule from './components/Dashborad/UpdateAvialblity/YourSchedule';
 import PatientDashboard from './components/UserDashboard/PatientDashboard/PatientDashboard';
-
+import Paymentsuccess from './components/UserDashboard/Paymentsuccess';
 
 function App() {
   return (
@@ -41,8 +41,8 @@ function App() {
 
         <Route path="/user-dashboard" element={<PatientDashboard />}/>
 
-
-
+     
+        <Route path="/payment-success" element={<Paymentsuccess />} />
 
 
 
