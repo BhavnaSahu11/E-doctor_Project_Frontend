@@ -11,8 +11,9 @@ import DoctorDashboard from './components/Dashborad/DoctorDashboard/DoctorDashbo
 import EditProfile from './components/Dashborad/EditDoctorProfile/EditProfile';
 import YourSchedule from './components/Dashborad/UpdateAvialblity/YourSchedule';
 import PatientDashboard from './components/UserDashboard/PatientDashboard/PatientDashboard';
-import Paymentsuccess from './components/UserDashboard/Paymentsuccess';
+import PaymentSuccess from './components/UserDashboard/PaymentSuccess';
 
+import FeedbackListHomePage from './components/UserDashboard/FeedbackList/FeedbackListHomePage';
 function App() {
   return (
     <BrowserRouter>
@@ -42,9 +43,9 @@ function App() {
         <Route path="/user-dashboard" element={<PatientDashboard />}/>
 
      
-        <Route path="/payment-success" element={<Paymentsuccess />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
 
-
+        <Route path="/feedback-list" element={<FeedbackListHomePage />} /> 
 
 
       </Routes>
